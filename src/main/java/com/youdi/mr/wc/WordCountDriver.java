@@ -10,6 +10,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
 
+
+/**
+ * hadoop jar wc.jar  com.youdi.mr.wc.WordCountDriver
+ */
+
 public class WordCountDriver {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
         // 1.获取job对象
@@ -33,8 +38,8 @@ public class WordCountDriver {
         job.setOutputValueClass(IntWritable.class);
 
         // 6. 设置输入输出路径
-        FileInputFormat.setInputPaths(job, new Path(args[0]));
-        FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        FileInputFormat.setInputPaths(job, new Path("/Users/youdi/project/javaproject/HadoopRuminant/data/input"));
+        FileOutputFormat.setOutputPath(job, new Path("/Users/youdi/project/javaproject/HadoopRuminant/data/output"));
 
         // 7. 提交job
         job.waitForCompletion(true);
