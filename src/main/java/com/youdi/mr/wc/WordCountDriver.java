@@ -5,6 +5,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.lib.input.CombineTextInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
@@ -36,6 +37,17 @@ public class WordCountDriver {
         // 5. 最终数据输出key value类型
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
+
+
+
+
+
+        // 设置 InputFormat, 默认是使用 TextInputFormat.class
+        job.setInputFormatClass(CombineTextInputFormat.class);
+
+        // 虚拟存储切片最大值设置
+        CombineTextInputFormat.setMaxInputSplitSize(job, 4194304); //  4m
+
 
         // 6. 设置输入输出路径
         FileInputFormat.setInputPaths(job, new Path("/Users/youdi/project/javaproject/HadoopRuminant/data/input"));
