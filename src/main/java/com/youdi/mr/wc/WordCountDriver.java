@@ -41,6 +41,9 @@ public class WordCountDriver {
 
 
 
+        // 设置 ruduce
+        job.setNumReduceTasks(2);
+
 
         // 设置 InputFormat, 默认是使用 TextInputFormat.class
         job.setInputFormatClass(CombineTextInputFormat.class);
