@@ -31,6 +31,10 @@ public class FlowDriver {
         job.setOutputValueClass(FlowSum.class);
 
 
+        job.setPartitionerClass(TelPartitioner.class);
+        job.setNumReduceTasks(5);
+
+
         // 6. 输入文件路径
         FileInputFormat.setInputPaths(job, new Path("/Users/youdi/project/javaproject/HadoopRuminant/data/input"));
         FileOutputFormat.setOutputPath(job, new Path("/Users/youdi/project/javaproject/HadoopRuminant/data/output"));
