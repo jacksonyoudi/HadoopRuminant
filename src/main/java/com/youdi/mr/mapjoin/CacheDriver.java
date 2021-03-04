@@ -13,9 +13,11 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 public class CacheDriver {
-    public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException, URISyntaxException {
         // 1.获取job对象
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf);
@@ -44,11 +46,13 @@ public class CacheDriver {
 
 
         // 设置 InputFormat, 默认是使用 TextInputFormat.class
-        job.setInputFormatClass(CombineTextInputFormat.class);
+//        job.setInputFormatClass(CombineTextInputFormat.class);
 
         // 虚拟存储切片最大值设置
-        CombineTextInputFormat.setMaxInputSplitSize(job, 4194304); //  4m
+//        CombineTextInputFormat.setMaxInputSplitSize(job, 4194304); //  4m
 
+
+        job.setCacheFiles(new URI[]{new URI("")});
 
         // 6. 设置输入输出路径
         FileInputFormat.setInputPaths(job, new Path("/Users/youdi/project/javaproject/HadoopRuminant/data/input"));
